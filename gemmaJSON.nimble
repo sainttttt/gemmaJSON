@@ -3,7 +3,7 @@
 version     = "0.1.0"
 author      = "saint"
 description = "json parsing library based on bindings of simdjson"
-license     = "Other"
+license     = "MIT"
 srcDir      = "src"
 
 
