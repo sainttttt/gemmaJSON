@@ -1,5 +1,6 @@
 import system/ctypes
 include ./gemmaJSON/compile
+import std/json
 
 type gemmaJSON = pointer
 
@@ -32,8 +33,12 @@ proc gemmasimdjson_element_get_int64_t(attrname: cstring, attrlen: csize_t,
 proc gemmasimdjson_element_get(attrname: cstring, attrlen: csize_t,
                                    e: pointer, output_element: pointer): bool {.importc: "gemmasimdjson_element_get",
                                                                                  header: "gemmasimdjsonc.h".}
+
 proc gemmasimdjson_element_get_type(attrname: cstring, attrlen: csize_t,
                                         e: pointer): char {.importc: "gemmasimdjson_element_get_type",
+                                                             header: "gemmasimdjsonc.h".}
+
+proc gemmasimdjson_minify(element: pointer): cstring {.importc: "gemmasimdjson_minify",
                                                              header: "gemmasimdjsonc.h".}
 
 proc parseGemmaJSON*(s: string): gemmaNode =
@@ -100,15 +105,17 @@ proc `[]`*(n: gemmaNode, index: int): gemmaNode =
   return n.getElement(&"/{index}")
 
 proc `$`*(n: gemmaNode): string =
-  if n.type == GemmaNodeType.String:
-    return n.getStr("")
-  elif n.type == GemmaNodeType.Int:
-    return n.getInt("").`$`
-  elif n.type == GemmaNodeType.Object:
-    return "[Object]"
-  elif n.type == GemmaNodeType.Array:
-    return "[Array]"
+  var minify = gemmasimdjson_minify(n.json)
+  return $minify
 
+proc minify(n: gemmaNode): string =
+  var outString: cstring
+  var bufferSize = 10.csize_t
+  var minify = gemmasimdjson_minify(n.json)
+  return $minify
+
+proc toJsonNode*(n: gemmaNode): JsonNode =
+  return parseJSON($n)
 
 iterator items*(n: gemmaNode): gemmaNode =
   if n.type != GemmaNodeType.Array:

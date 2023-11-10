@@ -8,6 +8,7 @@ proc sh (cmd :string; dir :string= "") :void=
   ## Runs the command from `dir` when specified.
   when defined(windows): {.warning: "running `sh -c` commands on Windows has not been tested".}
   var command :string
+  # echo cmd
   if dir != "":  command = &"cd {dir}; " & cmd
   else:          command = cmd
   discard gorgeEx(&"sh -c \"{$command}\"").output

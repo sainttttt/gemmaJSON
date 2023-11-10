@@ -36,7 +36,7 @@ extern "C" {
 
   // Export element `e` as JSON into the "buffer" and returns the exported JSON size.
   // If the "buffer_size" is too small, returns 0;
-  size_t gemmasimdjson_minify(void * element, char * buffer, size_t buffer_size);
+char * gemmasimdjson_minify(void * e);
 
 #endif
 

@@ -1,7 +1,3 @@
-// We have to include "Python.h" b/c otherwise parser.parse() crashes
-// Assumption is that Python.h sets some definition that is used by `simdjson.h`
-// TODO: Find what `ifdef` is set and set that without `Python.h`
-
 #include "simdjson.h"
 #include "gemmasimdjsonc.h"
 
@@ -21,7 +17,6 @@ void gemmasimdjson_parser_del(void * p) {
 const size_t gemmasimdjson_element_sizeof(void) {
 	return sizeof(simdjson::dom::element);
 }
-
 
 bool gemmasimdjson_parser_parse(void * p, void * memory, char * data, size_t datalen) {
 	simdjson::dom::parser * parser = static_cast<simdjson::dom::parser *>(p);
@@ -186,19 +181,15 @@ int gemmasimdjson_parser_test() {
 	if (error) {
 		return -1;
 	}
-	
+
 	return 0;
 }
 
-
-size_t gemmasimdjson_minify(void * e, char * buffer, size_t buffer_size) {
+char * gemmasimdjson_minify(void * e) {
 	simdjson::dom::element * element = static_cast<simdjson::dom::element *>(e);
 	std::string json_string = simdjson::minify(*element);
-
-	if (json_string.size() < buffer_size) {
-		std::strcpy(buffer, json_string.c_str());
-		return json_string.size();
-	} else {
-		return 0; // The output JSON doesn't fit
-	}
+  char *buf =  (char *)malloc(json_string.size());
+  std::strcpy(buf, json_string.c_str());
+  printf("%s\n", (char *)json_string.c_str());
+  return buf;
 }
