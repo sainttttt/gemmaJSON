@@ -1,4 +1,4 @@
-#![gemmaJSONlogo](https://github.com/sainttttt/gemmaJSON/assets/58609876/836b0495-6d6d-476d-b124-fa7d9979f00f)
+![gemmaJSONlogo](https://github.com/sainttttt/gemmaJSON/assets/58609876/836b0495-6d6d-476d-b124-fa7d9979f00f)
  gemmaJSON - simdjson bindings for Nim
 
 `nimble install gemmaJSON`
