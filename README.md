@@ -4,6 +4,17 @@
 `nimble install gemmaJSON`
 
 
+## Benchmarks
+
+Test was for deserialization of reddit comment json dumps, checking if the entry was from a specific subreddit
+
+```
+name ............................... min time      avg time    std dv  times
+sainttttt/gemmaJSON ................ 13.291 s      13.386 s    ±0.110   x15
+treeform/jsony ..................... 28.280 s      28.659 s    ±0.366   x15
+nim std/json ....................... 72.095 s      73.678 s    ±1.436   x15
+```
+
 ## Usage
 
 ```nim

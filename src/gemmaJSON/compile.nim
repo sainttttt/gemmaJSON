@@ -23,9 +23,9 @@ const curSrcPath = currentSourcePath.parentDir
 static:
   sh(&"""mkdir -p {cacheDir}""")
   when defined(linux):
-    sh(&"""g++ -fpic -c {curSrcPath}/gemmasimdjsonc.cpp {curSrcPath}/simdjson.cpp """, cacheDir)
+    sh(&"""g++ -fpic -c -O3 {curSrcPath}/gemmasimdjsonc.cpp {curSrcPath}/simdjson.cpp """, cacheDir)
   elif defined(macosx):
-    sh(&"""clang++ -c {curSrcPath}/gemmasimdjsonc.cpp {curSrcPath}/simdjson.cpp -std=c++11""", cacheDir)
+    sh(&"""clang++ -c -O3 {curSrcPath}/gemmasimdjsonc.cpp {curSrcPath}/simdjson.cpp -std=c++11""", cacheDir)
 
   # sh(&"""cp {cacheDir}/libgemmaJSON.so {outDir}/""")
 
