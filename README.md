@@ -18,18 +18,18 @@ nim std/json ......... 72.095 s      73.678 s    ±1.436   x15
 ## Usage
 
 ```nim
-var json = parseGemmaJSON("""{"cat": {"a": ["woof", ["meow"], 2]}}""")
+var jsonObj = parseGemmajsonObj("""{"cat": {"a": ["woof", ["meow"], 2]}}""")
 
-echo json.getStr("/cat/a/0")
+echo jsonObj.getStr("/cat/a/0")
 # woof
 
-echo json.getStr("/cat/a/1/0")
+echo jsonObj.getStr("/cat/a/1/0")
 # meow
 
-echo $json["cat"]["a"][0]
+echo $jsonObj["cat"]["a"][0]
 # woof
 
-echo $json
+echo $jsonObj
 # {"cat":{"a":["woof",["meow"],2]}}
 
 var j = jsonObj.toJsonNode.pretty
@@ -47,7 +47,7 @@ echo j.pretty
 #   }
 # }
 
-for e in json.getElement("/cat/a"):
+for e in jsonObj.getElement("/cat/a"):
   echo $e
 
 # woof
