@@ -107,6 +107,8 @@ proc compile_cpp() =
 if not gemmasimdjsonc_o.ok or not simdjson_o.ok:
   mk_cache_dir()  
   compile_cpp()
+else:
+  echo "C++ files already compiled"
 
 {.passC: &"-I{curSrcPath}/" .}
 {.passL: &"{cacheDir}/gemmasimdjsonc.o {cacheDir}/simdjson.o".}
