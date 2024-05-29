@@ -18,7 +18,7 @@ nim std/json ......... 72.095 s      73.678 s    ±1.436   x15
 ## Usage
 
 ```nim
-var jsonObj = parseGemmajsonObj("""{"cat": {"a": ["woof", ["meow"], 2]}}""")
+var jsonObj = parseGemmaJsonObj("""{"cat": {"a": ["woof", ["meow"], 2]}}""")
 
 echo jsonObj.getStr("/cat/a/0")
 # woof
