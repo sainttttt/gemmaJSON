@@ -32,7 +32,7 @@ echo $jsonObj["cat"]["a"][0]
 echo $jsonObj
 # {"cat":{"a":["woof",["meow"],2]}}
 
-var j = jsonObj.toJsonNode.pretty
+var j = jsonObj.toJsonNode
 echo j.pretty
 
 # {
