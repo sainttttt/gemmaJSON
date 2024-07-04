@@ -8,3 +8,5 @@
 nimcache
 .DS_Store
 *.out
+# idk why I have to add this, cause it's in my global gitignore
+.vim
